@@ -1,8 +1,14 @@
 import { IonAvatar, IonButton, IonButtons, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonHeader, IonIcon, IonMenuButton, IonPage, IonTitle, IonToolbar } from "@ionic/react";
-import React from "react";
+import React, { useEffect } from "react";
 import {ban, create, femaleOutline, list, mailOutline, personCircleOutline, settings, trash, videocamOutline, warning} from 'ionicons/icons';
 
-const ProfilePage:React.FC = () =>{
+const ProfilePage:React.FC<{checked:boolean}>=(props)=>{
+    useEffect(()=>{
+        console.log("checked : ",props.checked);
+        if(props.checked == false){
+            document.body.classList.add('dark');
+        }
+    },[])
     return (
         <IonPage>
             <IonHeader>
