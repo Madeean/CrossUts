@@ -8,6 +8,7 @@ const ProfilePage:React.FC<{checked:boolean}>=(props)=>{
         if(props.checked == false){
             document.body.classList.add('dark');
         }
+        
     },[])
     return (
         <IonPage>

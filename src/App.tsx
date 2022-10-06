@@ -27,6 +27,7 @@ import { useEffect, useState } from 'react';
 import ProfilePage from './pages/ProfilePage';
 import TargetPasangan from './pages/TargetPasangan';
 import { IonToggleCustomEvent } from '@ionic/core';
+import FriendsContextProvider from './data/FriendsContextProvider';
 
 setupIonicReact();
 
@@ -99,31 +100,33 @@ const App: React.FC = () => {
           </IonList>
         </IonContent>
       </IonMenu>
+      <FriendsContextProvider>
 
-      <IonRouterOutlet id='main'>
-            {/* <Route path='/' render={() =>(
-              <MainPage checked={isChecked} />
-            )}/>
-            <Route path='/profile-page' render={() =>(
-              <ProfilePage checked={isChecked} />
-            )} />
-            <Route path='/target-pasangan' render={() => (
-              <TargetPasangan checked={isChecked} />
-            )} /> */}
-            <Route path='/'>
-              <MainPage checked={isChecked} />
-            </Route>
-            <Route path='/profile-page'>
-              <ProfilePage checked={isChecked} />
-            </Route>
-            <Route path='/target-pasangan'>
-              <TargetPasangan checked={isChecked} />
-            </Route>
-            {/* <Route path='/spam' component={Spam} />
-            <Route path='/setting' component={Setting} />
-            <Route path="/mail/:mailId" component={MailDetail} />
-            <Redirect exact from='/' to="/tabs"/> */}
-      </IonRouterOutlet>
+        <IonRouterOutlet id='main'>
+              {/* <Route path='/' render={() =>(
+                <MainPage checked={isChecked} />
+              )}/>
+              <Route path='/profile-page' render={() =>(
+                <ProfilePage checked={isChecked} />
+              )} />
+              <Route path='/target-pasangan' render={() => (
+                <TargetPasangan checked={isChecked} />
+              )} /> */}
+              <Route path='/'>
+                <MainPage checked={isChecked} />
+              </Route>
+              <Route path='/profile-page'>
+                <ProfilePage checked={isChecked} />
+              </Route>
+              <Route path='/target-pasangan'>
+                <TargetPasangan checked={isChecked} />
+              </Route>
+              {/* <Route path='/spam' component={Spam} />
+              <Route path='/setting' component={Setting} />
+              <Route path="/mail/:mailId" component={MailDetail} />
+              <Redirect exact from='/' to="/tabs"/> */}
+        </IonRouterOutlet>
+      </FriendsContextProvider>
       
         
       

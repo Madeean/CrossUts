@@ -1,6 +1,6 @@
 import { IonPage, IonHeader, IonToolbar, IonTitle, IonMenu, IonButtons, IonMenuButton, IonIcon, IonButton, IonContent, IonGrid, IonRow, IonCol, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonAvatar, IonItemSliding, IonItemOptions, IonItemOption, IonItem, IonLabel, IonText } from '@ionic/react';
-import React, { useEffect, useRef } from "react";
-import {ban, create, femaleOutline, heart, list, mailOutline, personCircleOutline, settings, trash, videocamOutline, warning} from 'ionicons/icons';
+import React, { useContext, useEffect, useRef } from "react";
+import {ban, create, femaleOutline, heart, list, mailOutline, male, maleOutline, personCircleOutline, settings, trash, videocamOutline, warning} from 'ionicons/icons';
 
 import './MainPage.css'
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -14,13 +14,17 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
 import '../theme/variables.css';
+import FriendsContext from '../data/friend-context';
 
 
 
 const MainPage:React.FC<{checked:boolean}>=(props)=>{
     const slidingOptionRef = useRef<HTMLIonItemSlidingElement>(null);
+
+    const friendsCtx = useContext(FriendsContext);
+    
     useEffect(()=>{
-        console.log(props.checked);
+        console.log(friendsCtx.friends);
     },[]);
 
     const callFriendHandler=()=>{
@@ -47,6 +51,7 @@ const MainPage:React.FC<{checked:boolean}>=(props)=>{
     }
 
     return(
+        <>
         <IonPage>
             <IonHeader>
                 
@@ -67,6 +72,7 @@ const MainPage:React.FC<{checked:boolean}>=(props)=>{
                     <IonRow>
                         <Swiper modules={[Navigation, Pagination, Scrollbar, A11y]} spaceBetween={20} slidesPerView={3} onSlideChange={() => console.log('slide change')}onSwiper={(swiper) => console.log(swiper)}  pagination={{ clickable: true }} 
                         >
+                            {friendsCtx.friends.slice(0,4).map(friend =>( 
                             <IonCol size='4'>
                                 <SwiperSlide>
                                     <IonCard>
@@ -74,278 +80,47 @@ const MainPage:React.FC<{checked:boolean}>=(props)=>{
                                             <img alt="Silhouette of a person's head" src='https://avataaars.io/?avatarStyle=Circle&topType=WinterHat2&accessoriesType=Prescription01&hatColor=Red&facialHairType=MoustacheFancy&facialHairColor=Black&clotheType=ShirtCrewNeck&clotheColor=Gray02&eyeType=Side&eyebrowType=UnibrowNatural&mouthType=Smile&skinColor=Tanned' />
                                         </IonAvatar>
                                         <IonCardHeader>
-                                            <IonCardSubtitle className='ion-text-center' >Shaiden Rouge</IonCardSubtitle>
+                                            <IonCardSubtitle className='ion-text-center' >{friend.name}</IonCardSubtitle>
                                         </IonCardHeader>
                                     </IonCard>
                                 </SwiperSlide>
                             </IonCol>
-                            <IonCol size='4'>
-                                <SwiperSlide>
-                                    <IonCard>
-                                        <IonAvatar className='avatar'>
-                                            <img alt="Silhouette of a person's head" src='https://avataaars.io/?avatarStyle=Circle&topType=WinterHat2&accessoriesType=Prescription01&hatColor=Red&facialHairType=MoustacheFancy&facialHairColor=Black&clotheType=ShirtCrewNeck&clotheColor=Gray02&eyeType=Side&eyebrowType=UnibrowNatural&mouthType=Smile&skinColor=Tanned' />
-                                        </IonAvatar>
-                                        <IonCardHeader>
-                                            <IonCardSubtitle className='ion-text-center' >Shaiden Rouge</IonCardSubtitle>
-                                        </IonCardHeader>
-                                    </IonCard>
-                                </SwiperSlide>
-                            </IonCol>
-                            <IonCol size='4'>
-                                <SwiperSlide>
-                                    <IonCard>
-                                        <IonAvatar className='avatar'>
-                                            <img alt="Silhouette of a person's head" src='https://avataaars.io/?avatarStyle=Circle&topType=WinterHat2&accessoriesType=Prescription01&hatColor=Red&facialHairType=MoustacheFancy&facialHairColor=Black&clotheType=ShirtCrewNeck&clotheColor=Gray02&eyeType=Side&eyebrowType=UnibrowNatural&mouthType=Smile&skinColor=Tanned' />
-                                        </IonAvatar>
-                                        <IonCardHeader>
-                                            <IonCardSubtitle className='ion-text-center' >Shaiden Rouge</IonCardSubtitle>
-                                        </IonCardHeader>
-                                    </IonCard>
-                                </SwiperSlide>
-                            </IonCol>
-                            <IonCol size='4'>
-                                <SwiperSlide>
-                                    <IonCard>
-                                        <IonAvatar className='avatar'>
-                                            <img alt="Silhouette of a person's head" src='https://avataaars.io/?avatarStyle=Circle&topType=WinterHat2&accessoriesType=Prescription01&hatColor=Red&facialHairType=MoustacheFancy&facialHairColor=Black&clotheType=ShirtCrewNeck&clotheColor=Gray02&eyeType=Side&eyebrowType=UnibrowNatural&mouthType=Smile&skinColor=Tanned' />
-                                        </IonAvatar>
-                                        <IonCardHeader>
-                                            <IonCardSubtitle className='ion-text-center' >Shaiden Rouge</IonCardSubtitle>
-                                        </IonCardHeader>
-                                    </IonCard>
-                                </SwiperSlide>
-                            </IonCol>
-                            <IonCol size='4'>
-                                <SwiperSlide>
-                                    <IonCard>
-                                        <IonAvatar className='avatar'>
-                                            <img alt="Silhouette of a person's head" src='https://avataaars.io/?avatarStyle=Circle&topType=WinterHat2&accessoriesType=Prescription01&hatColor=Red&facialHairType=MoustacheFancy&facialHairColor=Black&clotheType=ShirtCrewNeck&clotheColor=Gray02&eyeType=Side&eyebrowType=UnibrowNatural&mouthType=Smile&skinColor=Tanned' />
-                                        </IonAvatar>
-                                        <IonCardHeader>
-                                            <IonCardSubtitle className='ion-text-center' >Shaiden Rouge</IonCardSubtitle>
-                                        </IonCardHeader>
-                                    </IonCard>
-                                </SwiperSlide>
-                            </IonCol>
+                            ))}
                             
                         
                         </Swiper>
                         
                         </IonRow>
                     </IonGrid>
-
-                <IonItemSliding  ref={slidingOptionRef}>
-                    
-                    <IonItemOptions >
-                        <IonItemOption color='primary' onClick={EditingFriendHandler}>
-                            <IonIcon slot="icon-only" icon={heart}/>
-                        </IonItemOption>
-                    </IonItemOptions>
-                    <IonItem lines="full" button onClick={callFriendHandler}>
-                        <IonAvatar className="ion-margin-end">
-                            <img alt="Silhouette of a person's head" src='https://avataaars.io/?avatarStyle=Circle&topType=WinterHat2&accessoriesType=Prescription01&hatColor=Red&facialHairType=MoustacheFancy&facialHairColor=Black&clotheType=ShirtCrewNeck&clotheColor=Gray02&eyeType=Side&eyebrowType=UnibrowNatural&mouthType=Smile&skinColor=Tanned' />
-                        </IonAvatar>
-                        <IonGrid>
-                            <IonCol>
-                                <IonLabel className='ion-text-lg-left'>Divi Mini</IonLabel>
-                                <IonLabel>Oh Yeah</IonLabel>
-                                <IonLabel>
-                                    <IonIcon slot='start' icon={femaleOutline}/>
-                                    Female
-                                </IonLabel>
-                            </IonCol>
-                        </IonGrid>
-                        
-                    </IonItem>
-                </IonItemSliding>
-                <IonItemSliding  ref={slidingOptionRef}>
-                    <IonItemOptions side="start">
-                        <IonItemOption color='danger' onClick={blockFriendhandler}>
-                            <IonIcon slot="icon-only" icon={ban}/>
-                        </IonItemOption>
-                        <IonItemOption color='warning' onClick={deletingFriendHandler}>
-                            <IonIcon slot="icon-only" icon={trash} color='dark'/>
-                        </IonItemOption>
-                    </IonItemOptions>
-                    <IonItemOptions >
-                        <IonItemOption color='warning' onClick={EditingFriendHandler}>
-                            <IonIcon slot="icon-only" icon={create}/>
-                        </IonItemOption>
-                    </IonItemOptions>
-                    <IonItem lines="full" button onClick={callFriendHandler}>
-                        <IonAvatar className="ion-margin-end">
-                            <img alt="Silhouette of a person's head" src='https://avataaars.io/?avatarStyle=Circle&topType=WinterHat2&accessoriesType=Prescription01&hatColor=Red&facialHairType=MoustacheFancy&facialHairColor=Black&clotheType=ShirtCrewNeck&clotheColor=Gray02&eyeType=Side&eyebrowType=UnibrowNatural&mouthType=Smile&skinColor=Tanned' />
-                        </IonAvatar>
-                        <IonGrid>
-                            <IonCol>
-                                <IonLabel className='ion-text-lg-left'>Divi Mini</IonLabel>
-                                <IonLabel>Oh Yeah</IonLabel>
-                                <IonLabel>
-                                    <IonIcon slot='start' icon={femaleOutline}/>
-                                    Female
-                                </IonLabel>
-                            </IonCol>
-                        </IonGrid>
-                        
-                    </IonItem>
-                </IonItemSliding>
-                <IonItemSliding  ref={slidingOptionRef}>
-                    <IonItemOptions side="start">
-                        <IonItemOption color='danger' onClick={blockFriendhandler}>
-                            <IonIcon slot="icon-only" icon={ban}/>
-                        </IonItemOption>
-                        <IonItemOption color='warning' onClick={deletingFriendHandler}>
-                            <IonIcon slot="icon-only" icon={trash} color='dark'/>
-                        </IonItemOption>
-                    </IonItemOptions>
-                    <IonItemOptions >
-                        <IonItemOption color='warning' onClick={EditingFriendHandler}>
-                            <IonIcon slot="icon-only" icon={create}/>
-                        </IonItemOption>
-                    </IonItemOptions>
-                    <IonItem lines="full" button onClick={callFriendHandler}>
-                        <IonAvatar className="ion-margin-end">
-                            <img alt="Silhouette of a person's head" src='https://avataaars.io/?avatarStyle=Circle&topType=WinterHat2&accessoriesType=Prescription01&hatColor=Red&facialHairType=MoustacheFancy&facialHairColor=Black&clotheType=ShirtCrewNeck&clotheColor=Gray02&eyeType=Side&eyebrowType=UnibrowNatural&mouthType=Smile&skinColor=Tanned' />
-                        </IonAvatar>
-                        <IonGrid>
-                            <IonCol>
-                                <IonLabel className='ion-text-lg-left'>Divi Mini</IonLabel>
-                                <IonLabel>Oh Yeah</IonLabel>
-                                <IonLabel>
-                                    <IonIcon slot='start' icon={femaleOutline}/>
-                                    Female
-                                </IonLabel>
-                            </IonCol>
-                        </IonGrid>
-                        
-                    </IonItem>
-                </IonItemSliding>
-                <IonItemSliding  ref={slidingOptionRef}>
-                    <IonItemOptions side="start">
-                        <IonItemOption color='danger' onClick={blockFriendhandler}>
-                            <IonIcon slot="icon-only" icon={ban}/>
-                        </IonItemOption>
-                        <IonItemOption color='warning' onClick={deletingFriendHandler}>
-                            <IonIcon slot="icon-only" icon={trash} color='dark'/>
-                        </IonItemOption>
-                    </IonItemOptions>
-                    <IonItemOptions >
-                        <IonItemOption color='warning' onClick={EditingFriendHandler}>
-                            <IonIcon slot="icon-only" icon={create}/>
-                        </IonItemOption>
-                    </IonItemOptions>
-                    <IonItem lines="full" button onClick={callFriendHandler}>
-                        <IonAvatar className="ion-margin-end">
-                            <img alt="Silhouette of a person's head" src='https://avataaars.io/?avatarStyle=Circle&topType=WinterHat2&accessoriesType=Prescription01&hatColor=Red&facialHairType=MoustacheFancy&facialHairColor=Black&clotheType=ShirtCrewNeck&clotheColor=Gray02&eyeType=Side&eyebrowType=UnibrowNatural&mouthType=Smile&skinColor=Tanned' />
-                        </IonAvatar>
-                        <IonGrid>
-                            <IonCol>
-                                <IonLabel className='ion-text-lg-left'>Divi Mini</IonLabel>
-                                <IonLabel>Oh Yeah</IonLabel>
-                                <IonLabel>
-                                    <IonIcon slot='start' icon={femaleOutline}/>
-                                    Female
-                                </IonLabel>
-                            </IonCol>
-                        </IonGrid>
-                        
-                    </IonItem>
-                </IonItemSliding>
-                <IonItemSliding  ref={slidingOptionRef}>
-                    <IonItemOptions side="start">
-                        <IonItemOption color='danger' onClick={blockFriendhandler}>
-                            <IonIcon slot="icon-only" icon={ban}/>
-                        </IonItemOption>
-                        <IonItemOption color='warning' onClick={deletingFriendHandler}>
-                            <IonIcon slot="icon-only" icon={trash} color='dark'/>
-                        </IonItemOption>
-                    </IonItemOptions>
-                    <IonItemOptions >
-                        <IonItemOption color='warning' onClick={EditingFriendHandler}>
-                            <IonIcon slot="icon-only" icon={create}/>
-                        </IonItemOption>
-                    </IonItemOptions>
-                    <IonItem lines="full" button onClick={callFriendHandler}>
-                        <IonAvatar className="ion-margin-end">
-                            <img alt="Silhouette of a person's head" src='https://avataaars.io/?avatarStyle=Circle&topType=WinterHat2&accessoriesType=Prescription01&hatColor=Red&facialHairType=MoustacheFancy&facialHairColor=Black&clotheType=ShirtCrewNeck&clotheColor=Gray02&eyeType=Side&eyebrowType=UnibrowNatural&mouthType=Smile&skinColor=Tanned' />
-                        </IonAvatar>
-                        <IonGrid>
-                            <IonCol>
-                                <IonLabel className='ion-text-lg-left'>Divi Mini</IonLabel>
-                                <IonLabel>Oh Yeah</IonLabel>
-                                <IonLabel>
-                                    <IonIcon slot='start' icon={femaleOutline}/>
-                                    Female
-                                </IonLabel>
-                            </IonCol>
-                        </IonGrid>
-                        
-                    </IonItem>
-                </IonItemSliding>
-                <IonItemSliding  ref={slidingOptionRef}>
-                    <IonItemOptions side="start">
-                        <IonItemOption color='danger' onClick={blockFriendhandler}>
-                            <IonIcon slot="icon-only" icon={ban}/>
-                        </IonItemOption>
-                        <IonItemOption color='warning' onClick={deletingFriendHandler}>
-                            <IonIcon slot="icon-only" icon={trash} color='dark'/>
-                        </IonItemOption>
-                    </IonItemOptions>
-                    <IonItemOptions >
-                        <IonItemOption color='warning' onClick={EditingFriendHandler}>
-                            <IonIcon slot="icon-only" icon={create}/>
-                        </IonItemOption>
-                    </IonItemOptions>
-                    <IonItem lines="full" button onClick={callFriendHandler}>
-                        <IonAvatar className="ion-margin-end">
-                            <img alt="Silhouette of a person's head" src='https://avataaars.io/?avatarStyle=Circle&topType=WinterHat2&accessoriesType=Prescription01&hatColor=Red&facialHairType=MoustacheFancy&facialHairColor=Black&clotheType=ShirtCrewNeck&clotheColor=Gray02&eyeType=Side&eyebrowType=UnibrowNatural&mouthType=Smile&skinColor=Tanned' />
-                        </IonAvatar>
-                        <IonGrid>
-                            <IonCol>
-                                <IonLabel className='ion-text-lg-left'>Divi Mini</IonLabel>
-                                <IonLabel>Oh Yeah</IonLabel>
-                                <IonLabel>
-                                    <IonIcon slot='start' icon={femaleOutline}/>
-                                    Female
-                                </IonLabel>
-                            </IonCol>
-                        </IonGrid>
-                        
-                    </IonItem>
-                </IonItemSliding>
-                <IonItemSliding  ref={slidingOptionRef}>
-                    <IonItemOptions side="start">
-                        <IonItemOption color='danger' onClick={blockFriendhandler}>
-                            <IonIcon slot="icon-only" icon={ban}/>
-                        </IonItemOption>
-                        <IonItemOption color='warning' onClick={deletingFriendHandler}>
-                            <IonIcon slot="icon-only" icon={trash} color='dark'/>
-                        </IonItemOption>
-                    </IonItemOptions>
-                    <IonItemOptions >
-                        <IonItemOption color='warning' onClick={EditingFriendHandler}>
-                            <IonIcon slot="icon-only" icon={create}/>
-                        </IonItemOption>
-                    </IonItemOptions>
-                    <IonItem lines="full" button onClick={callFriendHandler}>
-                        <IonAvatar className="ion-margin-end">
-                            <img alt="Silhouette of a person's head" src='https://avataaars.io/?avatarStyle=Circle&topType=WinterHat2&accessoriesType=Prescription01&hatColor=Red&facialHairType=MoustacheFancy&facialHairColor=Black&clotheType=ShirtCrewNeck&clotheColor=Gray02&eyeType=Side&eyebrowType=UnibrowNatural&mouthType=Smile&skinColor=Tanned' />
-                        </IonAvatar>
-                        <IonGrid>
-                            <IonCol>
-                                <IonLabel className='ion-text-lg-left'>Divi Mini</IonLabel>
-                                <IonLabel>Oh Yeah</IonLabel>
-                                <IonLabel>
-                                    <IonIcon slot='start' icon={femaleOutline}/>
-                                    Female
-                                </IonLabel>
-                            </IonCol>
-                        </IonGrid>
-                        
-                    </IonItem>
-                </IonItemSliding>
+                {friendsCtx.friends.map(friend =>( 
+                    <IonItemSliding  ref={slidingOptionRef} key={friend.id}>
+                        <IonItemOptions >
+                            <IonItemOption color='primary' onClick={EditingFriendHandler}>
+                                <IonIcon slot="icon-only" icon={heart}/>
+                            </IonItemOption>
+                        </IonItemOptions>
+                        <IonItem lines="full" button onClick={callFriendHandler}>
+                            <IonAvatar className="ion-margin-end">
+                                <img alt="Silhouette of a person's head" src='https://avataaars.io/?avatarStyle=Circle&topType=WinterHat2&accessoriesType=Prescription01&hatColor=Red&facialHairType=MoustacheFancy&facialHairColor=Black&clotheType=ShirtCrewNeck&clotheColor=Gray02&eyeType=Side&eyebrowType=UnibrowNatural&mouthType=Smile&skinColor=Tanned' />
+                            </IonAvatar>
+                            <IonGrid>
+                                <IonCol>
+                                    <IonLabel className='ion-text-lg-left'>{friend.name}</IonLabel>
+                                    <IonLabel>{friend.description}</IonLabel>
+                                    <IonLabel>
+                                        <IonIcon slot='start' icon= {friend.gender == "male" ? femaleOutline : maleOutline}  />
+                                        {friend.gender}
+                                    </IonLabel>
+                                </IonCol>
+                            </IonGrid>                 
+                        </IonItem>
+                    </IonItemSliding>
+                ))}
+                
+                
             </IonContent>
         </IonPage>
+        </>
     );
 }
 
