@@ -84,11 +84,11 @@ const App: React.FC = () => {
                   
                   <IonLabel>Daftar Calon Pasangan</IonLabel>
                 </IonItem>
-                <IonItem button href='/target-pasangan'>
+                <IonItem button routerLink='/target-pasangan'>
                   
                   <IonLabel>Target Pasangan</IonLabel>
                 </IonItem>
-                <IonItem button href='/profile-page'>
+                <IonItem button routerLink='/profile-page'>
                   
                   <IonLabel>Profile</IonLabel>
                 </IonItem>
@@ -112,19 +112,19 @@ const App: React.FC = () => {
               <Route path='/target-pasangan' render={() => (
                 <TargetPasangan checked={isChecked} />
               )} /> */}
-              <Route path='/'>
+              <Route exact path='/'>
                 <MainPage checked={isChecked} />
               </Route>
-              <Route path='/profile-page'>
+              <Route exact path='/profile-page'>
                 <ProfilePage checked={isChecked} />
               </Route>
-              <Route path='/target-pasangan'>
+              <Route exact path='/target-pasangan'>
                 <TargetPasangan checked={isChecked} />
               </Route>
-              {/* <Route path='/spam' component={Spam} />
-              <Route path='/setting' component={Setting} />
-              <Route path="/mail/:mailId" component={MailDetail} />
-              <Redirect exact from='/' to="/tabs"/> */}
+              {/* <Route exact path='/' component={MainPage} />
+              <Route exact path='/profile-page' component={ProfilePage} />
+              <Route exact path='/target-pasangan' component={TargetPasangan}/> */}
+              
         </IonRouterOutlet>
       </FriendsContextProvider>
       

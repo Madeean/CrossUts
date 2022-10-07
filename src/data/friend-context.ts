@@ -6,19 +6,22 @@ export interface Friend {
     photo:string,
     gender:string,
     description:string,
+    love:number
 }
 
 interface Context{
     friends:Friend[],
-    addFriend: (friendName:string, friendPhoto:string,gender:string, description:string) => void,
+    addFriend: (friendName:string, friendPhoto:string,gender:string, description:string,love:number) => void,
     updateFriend:()=>void,
-    deleteFriend:()=>void,
+    deleteFriend:(name:string, photo: string,gender:string, description:string , id:string)=>void,
+    storeFriend:(name:string, photo: string,gender:string, description:string , id:string)=>void,
 }
 const FriendsContext = React.createContext<Context>({
     friends:[],
     addFriend:()=>{},
     updateFriend:()=>{},
     deleteFriend:()=>{},
+    storeFriend:()=>{},
 })
 
 export default FriendsContext;

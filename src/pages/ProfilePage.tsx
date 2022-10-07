@@ -5,8 +5,11 @@ import {ban, create, femaleOutline, list, mailOutline, personCircleOutline, sett
 const ProfilePage:React.FC<{checked:boolean}>=(props)=>{
     useEffect(()=>{
         console.log("checked : ",props.checked);
-        if(props.checked == false){
+        if(props.checked == true){
+            
             document.body.classList.add('dark');
+        }else{
+            document.body.classList.remove('dark');
         }
         
     },[])

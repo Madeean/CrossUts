@@ -1,4 +1,4 @@
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonMenu, IonButtons, IonMenuButton, IonIcon, IonButton, IonContent, IonGrid, IonRow, IonCol, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonAvatar, IonItemSliding, IonItemOptions, IonItemOption, IonItem, IonLabel, IonText } from '@ionic/react';
+import { IonPage, IonHeader, IonToolbar, IonTitle, IonMenu, IonButtons, IonMenuButton, IonIcon, IonButton, IonContent, IonGrid, IonRow, IonCol, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonAvatar, IonItemSliding, IonItemOptions, IonItemOption, IonItem, IonLabel, IonText, useIonLoading } from '@ionic/react';
 import React, { useContext, useEffect, useRef } from "react";
 import {ban, create, femaleOutline, heart, list, mailOutline, male, maleOutline, personCircleOutline, settings, trash, videocamOutline, warning} from 'ionicons/icons';
 
@@ -20,6 +20,7 @@ import FriendsContext from '../data/friend-context';
 
 const MainPage:React.FC<{checked:boolean}>=(props)=>{
     const slidingOptionRef = useRef<HTMLIonItemSlidingElement>(null);
+    const [present, dismiss] = useIonLoading();
 
     const friendsCtx = useContext(FriendsContext);
     
@@ -40,11 +41,20 @@ const MainPage:React.FC<{checked:boolean}>=(props)=>{
         slidingOptionRef.current?.closeOpened();
         console.log("Deleting");
     }
-    const EditingFriendHandler=(event:React.MouseEvent)=>{
+    const EditingFriendHandler=(name:string, photo: string,gender:string, description:string , id:string)=>{
         // event.stopPropagation();
         slidingOptionRef.current?.closeOpened();
-        console.log("Editing");
+        console.log("store friend");
+
+        
+        friendsCtx.storeFriend(name,photo,gender,description,id);
+        present({
+            message: 'Loading...',
+            duration: 500,
+        })
+
     }
+    
 
     const icon=()=>{
         console.log("masuk icon")
@@ -72,7 +82,8 @@ const MainPage:React.FC<{checked:boolean}>=(props)=>{
                     <IonRow>
                         <Swiper modules={[Navigation, Pagination, Scrollbar, A11y]} spaceBetween={20} slidesPerView={3} onSlideChange={() => console.log('slide change')}onSwiper={(swiper) => console.log(swiper)}  pagination={{ clickable: true }} 
                         >
-                            {friendsCtx.friends.slice(0,4).map(friend =>( 
+                            {friendsCtx.friends.slice(0,5).map(friend =>( 
+                                friend.love == 0 ? (
                             <IonCol size='4'>
                                 <SwiperSlide>
                                     <IonCard>
@@ -85,17 +96,21 @@ const MainPage:React.FC<{checked:boolean}>=(props)=>{
                                     </IonCard>
                                 </SwiperSlide>
                             </IonCol>
+                                ):(
+                                    <IonGrid></IonGrid>
+                                )
                             ))}
                             
                         
                         </Swiper>
                         
-                        </IonRow>
-                    </IonGrid>
+                    </IonRow>
+                </IonGrid>
                 {friendsCtx.friends.map(friend =>( 
+                    friend.love == 0 ? (
                     <IonItemSliding  ref={slidingOptionRef} key={friend.id}>
                         <IonItemOptions >
-                            <IonItemOption color='primary' onClick={EditingFriendHandler}>
+                            <IonItemOption color='primary' onClick={() =>EditingFriendHandler(friend.name,friend.photo,friend.gender,friend.description,friend.id)}>
                                 <IonIcon slot="icon-only" icon={heart}/>
                             </IonItemOption>
                         </IonItemOptions>
@@ -115,6 +130,9 @@ const MainPage:React.FC<{checked:boolean}>=(props)=>{
                             </IonGrid>                 
                         </IonItem>
                     </IonItemSliding>
+                    ):(
+                        <IonGrid></IonGrid>
+                    )
                 ))}
                 
                 
